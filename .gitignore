@@ -1,5 +1,5 @@
-.backup
-.conda
+.backup/
+.conda/
 experiments/
 playground.ipynb
 
