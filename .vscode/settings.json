@@ -1,0 +1,44 @@
+{
+    "cSpell.words": [
+        "alignat",
+        "alignedat",
+        "allclose",
+        "atol",
+        "bmatrix",
+        "coeff",
+        "coeffs",
+        "cregbundle",
+        "dtype",
+        "kron",
+        "matplotlib",
+        "newaxis",
+        "nsimplify",
+        "prec",
+        "qargs",
+        "QASM",
+        "qubit",
+        "qubits",
+        "rtol",
+        "scipy",
+        "Statevector",
+        "statevectors",
+        "sympy",
+        "texttt",
+        "xyzxyzxyz",
+        "xzzz",
+        "zzxz"
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "files.exclude": {
+        ".pytest_cache/": true,
+        "__pycache__/": true,
+        "build/": true,
+        "*.egg-info/": true,
+        ".conda/": true,
+        ".backup/": true,
+    }
+}
