@@ -4,9 +4,9 @@
 A simple qiskit extension with more visualization function.
 
 * Improve original latex state vector visualization.
-* state vector visualization with x, y, z basis.
-* state vector measurement with x, y, z basis, and display all the possible measurement result in latex.
-* state vector & quantum circuit to latex matrix.
+* State vector visualization with x, y, z basis.
+* State vector measurement with x, y, z basis, and display all the possible measurement result in latex.
+* State vector & quantum circuit to latex matrix.
 
 ## Installation
 
@@ -26,7 +26,7 @@ A simple qiskit extension with more visualization function.
 
 ## Configuration
 
-the configuration file for this extension is located at `~/qiskit_extension/config/config.ini`
+The configuration file is located at `~/qiskit_extension/config/config.ini`
 
 ```ini
 ; Setting up the ket notation for the state vector,
