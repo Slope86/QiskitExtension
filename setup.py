@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.1.0",
     author="HSIEH, LI-YU",
     author_email="cjh9027@smail.nchu.edu.tw",
-    description="A Qiskit visualization extension",
+    description="A Qiskit visualize extension",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Slope86/QiskitExtension",
