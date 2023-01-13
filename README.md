@@ -73,6 +73,6 @@ qiskit[visualization] >= 0.22.3
 
 ## License
 
-The QiskitExtension project is open source under the MIT license.
+This QiskitExtension project is open source under the MIT license.
 However, the extensions that are installed separately are not part of the QiskitExtension project.
 They all have their own licenses!
