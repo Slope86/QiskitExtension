@@ -13,6 +13,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Slope86/QiskitExtension",
     packages=setuptools.find_packages(exclude=["experiments", "tests"]),
+    package_data={"": ["*.ini"]},
+    include_package_data=True,
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3.10",
@@ -20,6 +22,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=["qiskit[visualization]>=0.22.3"],
+    install_requires=["qiskit[visualization] >= 0.22.3"],
     python_requires=">=3.10",
 )

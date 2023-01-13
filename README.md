@@ -5,6 +5,14 @@ A simple qiskit extension with more visualization function.
 
 ## Installation
 
+* Install from PyPI
+
+```bash
+  pip install QiskitExtension
+```
+
+* Install from source
+
 ```bash
   git clone --depth 1 https://github.com/Slope86/QiskitExtension
   cd QiskitExtension
