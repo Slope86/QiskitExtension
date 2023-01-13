@@ -10,13 +10,13 @@ A simple qiskit extension with more visualization function.
 
 ## Installation
 
-* Install from PyPI
+Install from PyPI
 
 ```bash
   pip install QiskitExtension
 ```
 
-* Install from source
+Install from source
 
 ```bash
   git clone --depth 1 https://github.com/Slope86/QiskitExtension
@@ -43,7 +43,7 @@ y1 = j
 
 ## Usage/Examples
 
-A simple example to create a EPR pair:
+Creating an EPR pair with circuit:
 
 ```python
   from qiskit_extension.quantum_circuit2 import QuantumCircuit2 as qc2
@@ -62,6 +62,32 @@ A simple example to create a EPR pair:
 
   # visualize the state
   state_EPR.show_state() #|00> + |11>
+```
+
+Creating an EPR pair from label:
+  
+```python
+  from qiskit_extension.state_vector2 import StateVector2 as sv2
+
+  # create an EPR pair from label
+  state_EPR = sv2.from_label("00","11")
+
+  # visualize the state
+  state_EPR.show_state() #1/√2(|00> + |11>)
+```
+
+Visualize the state with different basis:
+
+```python
+  from qiskit_extension.state_vector2 import StateVector2 as sv2
+
+  # create an EPR pair from label
+  state_EPR = sv2.from_label("00","11")
+
+  # visualize the state
+  state00.show_state()           #1/√2(|00> + |11>)
+  state00.show_state(basis='xx') #1/√2(|++> + |-->)
+  state00.show_state(basis='yy') #1/√2(|ij> + |ji>)
 ```
 
 More examples can be found in the `examples` folder.
