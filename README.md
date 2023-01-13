@@ -49,7 +49,7 @@ A simple example to create a EPR pair:
   from qiskit_extension.quantum_circuit2 import QuantumCircuit2 as qc2
   from qiskit_extension.state_vector2 import StateVector2 as sv2
 
-  # create the circuit for creating EPR pair
+  # the circuit for creating EPR pair
   circuit_EPR = qc2(2)
   circuit_EPR.h(0)
   circuit_EPR.cx(0, 1)
