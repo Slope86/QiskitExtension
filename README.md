@@ -1,13 +1,13 @@
 
 # Qiskit StateVector extension
 
-A simple Qiskit StateVector extension with more visualization function.
+A simple Qiskit StateVector extension with more visualization function:
 
 * Improve original latex StateVector visualization.
 * StateVector visualization with x, y, z basis.
 * StateVector measurement with x, y, z basis, and visualize all the possible measurement result.
 * StateVector & QuantumCircuit to pretty latex matrix.
-* Using textbook qubits order. (for instance, if the first qubit is in state |0> and second is in state |1>, their joint state would be visualize as |01>)
+* Use textbook qubits order. (for instance, if the first qubit is in state |0> and second is in state |1>, their joint state would be visualize as |01>)
 
 ## Installation
 
