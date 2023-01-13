@@ -86,9 +86,9 @@ Visualize the state with different basis:
   state_EPR = sv2.from_label("00","11")
 
   # visualize the state
-  state00.show_state()           #1/√2(|00> + |11>)
-  state00.show_state(basis='xx') #1/√2(|++> + |-->)
-  state00.show_state(basis='yy') #1/√2(|ij> + |ji>)
+  state_EPR.show_state()           #1/√2(|00> + |11>)
+  state_EPR.show_state(basis='xx') #1/√2(|++> + |-->)
+  state_EPR.show_state(basis='yy') #1/√2(|ij> + |ji>)
 ```
 
 More examples can be found in the `examples` folder.
