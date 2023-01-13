@@ -28,6 +28,31 @@ y0 = i
 y1 = j
 ```
 
+## Usage/Examples
+
+A simple example to create a EPR pair:
+
+```python
+  from qiskit_extension.quantum_circuit2 import QuantumCircuit2 as qc2
+  from qiskit_extension.state_vector2 import StateVector2 as sv2
+
+  # create the circuit for creating EPR pair
+  circuit_EPR = qc2(2)
+  circuit_EPR.h(0)
+  circuit_EPR.cx(0, 1)
+
+  # create a ground state
+  state00 = sv2.from_label('00')
+
+  # evolve the state with the circuit
+  state_EPR = state00.evolve(circuit_EPR)
+
+  # visualize the state
+  state_EPR.show_state() #|00> + |11>
+```
+
+More examples can be found in the `examples` folder.
+
 ## Requirement
 
 Python >= 3.10\
