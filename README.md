@@ -3,6 +3,11 @@
 
 A simple qiskit extension with more visualization function.
 
+* Improve original latex state vector visualization.
+* state vector visualization with x, y, z basis.
+* state vector measurement with x, y, z basis, and display all the possible measurement result in latex.
+* state vector & quantum circuit to latex matrix.
+
 ## Installation
 
 * Install from PyPI
