@@ -42,10 +42,13 @@ y0 = i
 y1 = j
 ```
 
-## Usage/Examples
+## Usage
+
+[中文示範](https://github.com/Slope86/QiskitExtension/blob/master/examples/0.%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.ipynb)/[English demo](https://github.com/Slope86/QiskitExtension/blob/master/examples/eng%20(beta)/0.%20Basic%20operation.ipynb)
+
+## Examples
 
 Creating an EPR pair with circuit:
-
 ```python
   from qiskit_extension.quantum_circuit2 import QuantumCircuit2 as qc2
   from qiskit_extension.state_vector2 import StateVector2 as sv2
