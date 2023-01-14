@@ -91,7 +91,7 @@ Visualize the state with different basis:
   state_EPR.show_state(basis='yy') #1/√2(|ij> + |ji>)
 ```
 
-More examples can be found in the `examples` folder.
+More examples can be found in the [examples](https://github.com/Slope86/QiskitExtension/tree/master/examples) folder.
 
 ## Requirement
 
