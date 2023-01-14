@@ -31,7 +31,7 @@ The configuration file is located at `~/qiskit_extension/config/config.ini`
 
 ```ini
 ; Setting up the ket notation for the state vector,
-; e.g. |0>, |1>, |+>, |->, |i>, |j> (|j> = |-i>),
+; default to |0>, |1>, |+>, |->, |i>, |j>(representing|-i>),
 ; can change to other notation if needed. (only accept char)
 [ket]
 z0 = 0
