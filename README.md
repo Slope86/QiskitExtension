@@ -3,11 +3,11 @@
 
 A simple Qiskit StateVector extension with more visualization function:
 
-* Modifies the original StateVector visualization, adds alignment and line break.
+* Modifies the original StateVector visualization, adds line break and alignment.
 * StateVector visualization with x, y, z basis.
 * StateVector measurement with x, y, z basis, and visualizes all the possible measurement result.
 * Visualizes the vector of a StateVector and the unitary matrix of a QuantumCircuit as a visually pleasing matrix in LaTeX format.
-* Uses textbook qubits order. (for instance, if the first qubit is in state |0> and second is in state |1>, their joint state would be visualize as |01>)
+* Uses textbook qubit order. (for instance, if the first qubit is in state |0> and second is in state |1>, their joint state would be visualize as |01>)
 
 ## Installation
 
