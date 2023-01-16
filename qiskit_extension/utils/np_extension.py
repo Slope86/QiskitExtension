@@ -1,4 +1,11 @@
+from functools import reduce
+
 import numpy as np
+
+
+def tensor_product(*matrices: np.ndarray) -> np.ndarray:
+    """Tensor product of a list of square matrix or vector."""
+    return reduce(np.kron, matrices)
 
 
 def inverse_tensor(array: np.ndarray) -> np.ndarray:

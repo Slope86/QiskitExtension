@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import itertools
 import typing
-from typing import Any, List
+from typing import List
 
 import numpy as np
 from IPython.display import Latex
