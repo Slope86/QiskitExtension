@@ -8,23 +8,24 @@ from qiskit_extension import config
 
 
 class _ConfigMeta(type):
-    _z0: str
-    _z1: str
-    _x0: str
-    _x1: str
-    _y0: str
-    _y1: str
+    _z0: str = "0"
+    _z1: str = "1"
+    _x0: str = "+"
+    _x1: str = "-"
+    _y0: str = "i"
+    _y1: str = "j"
 
     def __new__(cls, name, bases, namespace):
         config_parser = configparser.ConfigParser()
         with pkg_resources.path(config, "config.ini") as path:
             config_parser.read(path)
-        namespace["_z0"] = config_parser["ket"]["z0"]
-        namespace["_z1"] = config_parser["ket"]["z1"]
-        namespace["_x0"] = config_parser["ket"]["x0"]
-        namespace["_x1"] = config_parser["ket"]["x1"]
-        namespace["_y0"] = config_parser["ket"]["y0"]
-        namespace["_y1"] = config_parser["ket"]["y1"]
+        for ket in config_parser["ket"]:
+            if ket not in ["z0", "z1", "x0", "x1", "y0", "y1"]:
+                raise ValueError("Unknown basis.")
+            if len(config_parser["ket"][ket]) != 1:
+                raise ValueError("The ket notation should be a single character.")
+            namespace[f"_{ket}"] = config_parser["ket"][ket]
+
         return super().__new__(cls, name, bases, namespace)
 
     @property

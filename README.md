@@ -32,7 +32,7 @@ The configuration file is located at `~/qiskit_extension/config/config.ini`
 ```ini
 ; This section sets up the notation for the StateVector(affect the visualization result and the constructor funcition from_label() ).
 ; The default notation uses |j> to represent |-i>. 
-; You can change the notation to other characters if necessary. (only accept single characters.)
+; You can change the notation to other character if necessary. (only accept single character.)
 [ket]
 z0 = 0
 z1 = 1
