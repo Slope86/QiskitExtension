@@ -21,9 +21,13 @@ class _ConfigMeta(type):
             config_parser.read(path)
         for ket in config_parser["ket"]:
             if ket not in ["z0", "z1", "x0", "x1", "y0", "y1"]:
-                raise ValueError("Unknown basis.")
+                print(f"Unknown basis [{ket}]. Basis should be z0, z1, x0, x1, y0, y1.")
+                print("Please check the config.ini file, invalid user setting will be ignored and use default setting.")
+                continue
             if len(config_parser["ket"][ket]) != 1:
-                raise ValueError("The ket notation should be a single character.")
+                print(f"The ket notation should be a single character but [{config_parser['ket'][ket]}] is given.")
+                print("Please check the config.ini file, invalid user setting will be ignored and use default setting.")
+                continue
             namespace[f"__{ket}"] = config_parser["ket"][ket]
 
         return super().__new__(cls, name, bases, namespace)
