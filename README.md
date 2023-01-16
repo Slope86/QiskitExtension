@@ -14,15 +14,15 @@ A simple Qiskit StateVector extension with more visualization function:
 Install from PyPI
 
 ```bash
-  pip install QiskitExtension
+pip install QiskitExtension
 ```
 
 Install from source
 
 ```bash
-  git clone --depth 1 https://github.com/Slope86/QiskitExtension
-  cd QiskitExtension
-  pip install .
+git clone --depth 1 https://github.com/Slope86/QiskitExtension
+cd QiskitExtension
+pip install .
 ```
 
 ## Configuration
@@ -51,48 +51,48 @@ y1 = j
 Creating an EPR pair with circuit:
 
 ```python
-  from qiskit_extension.quantum_circuit2 import QuantumCircuit2 as qc2
-  from qiskit_extension.state_vector2 import StateVector2 as sv2
+from qiskit_extension.quantum_circuit2 import QuantumCircuit2 as qc2
+from qiskit_extension.state_vector2 import StateVector2 as sv2
 
-  # the circuit for creating EPR pair
-  circuit_EPR = qc2(2)
-  circuit_EPR.h(0)
-  circuit_EPR.cx(0, 1)
+# the circuit for creating EPR pair
+circuit_EPR = qc2(2)
+circuit_EPR.h(0)
+circuit_EPR.cx(0, 1)
 
-  # create a ground state
-  state00 = sv2.from_label('00')
+# create a ground state
+state00 = sv2.from_label('00')
 
-  # evolve the state with the circuit
-  state_EPR = state00.evolve(circuit_EPR)
+# evolve the state with the circuit
+state_EPR = state00.evolve(circuit_EPR)
 
-  # visualize the state
-  state_EPR.show_state() #|00> + |11>
+# visualize the state
+state_EPR.show_state() #|00> + |11>
 ```
 
 Creating an EPR pair from label:
   
 ```python
-  from qiskit_extension.state_vector2 import StateVector2 as sv2
+from qiskit_extension.state_vector2 import StateVector2 as sv2
 
-  # create an EPR pair from label
-  state_EPR = sv2.from_label("00","11")
+# create an EPR pair from label
+state_EPR = sv2.from_label("00","11")
 
-  # visualize the state
-  state_EPR.show_state() #1/√2(|00> + |11>)
+# visualize the state
+state_EPR.show_state() #1/√2(|00> + |11>)
 ```
 
 Visualize the state with different basis:
 
 ```python
-  from qiskit_extension.state_vector2 import StateVector2 as sv2
+from qiskit_extension.state_vector2 import StateVector2 as sv2
 
-  # create an EPR pair from label
-  state_EPR = sv2.from_label("00","11")
+# create an EPR pair from label
+state_EPR = sv2.from_label("00","11")
 
-  # visualize the state
-  state_EPR.show_state()           #1/√2(|00> + |11>)
-  state_EPR.show_state(basis='xx') #1/√2(|++> + |-->)
-  state_EPR.show_state(basis='yy') #1/√2(|ij> + |ji>)
+# visualize the state
+state_EPR.show_state()           #1/√2(|00> + |11>)
+state_EPR.show_state(basis='xx') #1/√2(|++> + |-->)
+state_EPR.show_state(basis='yy') #1/√2(|ij> + |ji>)
 ```
 
 More examples can be found in the [examples](https://github.com/Slope86/QiskitExtension/tree/master/examples) folder.
