@@ -5,13 +5,18 @@ IPython.display.Latex(KaTeX) Supported Functions: https://katex.org/docs/support
 from __future__ import annotations
 
 import math
+import os  # use by latex to image
+import subprocess  # use by latex to image
+import tempfile  # use by latex to image
 import typing
 from typing import List, Tuple
 
 import numpy as np
 import sympy
-from IPython.display import Latex
 from numpy.typing import NDArray
+from PIL import Image  # use by latex to image
+from qiskit.visualization.exceptions import VisualizationError  # use by latex to image
+from qiskit.visualization.utils import _trim as trim_image  # use by latex to image
 
 from qiskit_extension.ket import Ket
 from qiskit_extension.utils.find_nth_substring import find_nth_substring
@@ -21,14 +26,14 @@ if typing.TYPE_CHECKING:
     from qiskit_extension.state_vector2 import StateVector2
 
 
-def matrix_to_latex(matrix: NDArray[np.float128 | np.complex128]) -> Latex:
+def matrix_to_latex(matrix: NDArray[np.float128 | np.complex128]) -> Image.Image:
     """Convert matrix to latex representation
 
     Args:
         matrix (NDArray[np.float128]): The matrix to be converted
 
     Returns:
-        Latex: LaTeX representation of the matrix
+        Image.Image: LaTeX representation of the matrix
     """
     prefix = R"$\begin{bmatrix}"
     suffix = R"\end{bmatrix}$"
@@ -58,19 +63,22 @@ def matrix_to_latex(matrix: NDArray[np.float128 | np.complex128]) -> Latex:
         latex_list.append(R"\\[6pt]")
 
     latex_code = prefix + "".join(latex_list) + suffix
-    return Latex(latex_code)
+    return _latex_code_to_img(latex_code)
 
 
-def state_to_latex(state: StateVector2, hide: List[int] | str = [], output_length: int = 2) -> Latex:
+def state_to_latex(
+    state: StateVector2, hide: List[int] | str = [], output_length: int = 2, source: bool = False
+) -> Image.Image | str:
     """Convert state vector to latex representation
 
     Args:
         state (StateVector2):state vector
         hide (List[int] | str, optional): hide qubits. Default to show all qubits.
         output_length (int, optional): 2^output_length = number of terms in each line. Defaults to 2(= 4 terms/line).
+        source (bool, optional): If True, return the latex source code. Defaults to False.
 
     Returns:
-        Latex: LaTeX representation of the state vector
+        Image.Image: LaTeX representation of the state vector
     """
     prefix = R"$\begin{alignedat}{" + f"{2**(output_length+1)+1}" + R"}&\; \;&\;"
     suffix = R"\end{alignedat}$"
@@ -78,20 +86,24 @@ def state_to_latex(state: StateVector2, hide: List[int] | str = [], output_lengt
     latex_code = _latex_line_break(latex_code, output_length)
     latex_code = prefix + latex_code + suffix
     latex_code = latex_code.replace(R"\;&\;-", R"-&\;")
-    return Latex(latex_code)
+    if source:
+        return latex_code
+    return _latex_code_to_img(latex_code)
 
 
 def measure_result_to_latex(
     result: Tuple[List[StateVector2], List[StateVector2]],
     hide: List[int] | str = [],
     output_length: int = 2,
-) -> Latex:
+    source: bool = False,
+) -> Image.Image | str:
     """Convert measurement result to latex representation
 
     Args:
         result (Tuple[StateVector2, StateVector2]): measurement result
         hide (List[int] | str, optional): hide qubits. Default show all qubits.
         output_length (int, optional): 2^output_length = number of terms in each line. Defaults to 2(= 4 terms/line).
+        source (bool, optional): If True, return the latex source code. Defaults to False.
 
     Returns:
         Latex: LaTeX representation of the measurement result
@@ -110,7 +122,9 @@ def measure_result_to_latex(
             latex_list.append(R"\\\\")
     latex_code = prefix + "".join(latex_list) + suffix
     latex_code = latex_code.replace(R"\;&\;-", R"-&\;")
-    return Latex(latex_code)
+    if source:
+        return latex_code
+    return _latex_code_to_img(latex_code)
 
 
 def _state_to_latex_ket(state: StateVector2, hide: List[int] | str = []) -> str:
@@ -280,3 +294,70 @@ def _latex_line_break(latex_code: str, output_length: int = 2) -> str:
     latex_code = latex_code.replace("&+", R"\;+&\;")
     latex_code = latex_code.replace("&-", R"\;-&\;")
     return latex_code
+
+
+def _latex_code_to_img(latex_code: str) -> Image.Image:
+    """Render latex code to an image,
+    modified from qiskit.visualization.circuit.circuit_visualization._latex_circuit_drawer
+
+    Args:
+        latex_code: latex code to convert
+
+    Returns:
+        PIL.Image: an in-memory representation of the circuit diagram
+
+    Raises:
+        MissingOptionalLibraryError: if pillow, pdflatex, or poppler are not installed
+        VisualizationError: if one of the conversion utilities failed for some internal or
+            file-access reason.
+    """
+    header = R"""
+\documentclass[border=2px]{standalone}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+"""
+    footer = R"\end{document}"
+    latex_source = header + latex_code + footer
+
+    tmpfilename = "latex_source"
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        tmppath = os.path.join(tmpdirname, tmpfilename + ".tex")
+
+        with open(tmppath, "w") as tmpfile:
+            tmpfile.write(latex_source)
+
+        try:
+            subprocess.run(
+                [
+                    "pdflatex",
+                    "-halt-on-error",
+                    f"-output-directory={tmpdirname}",
+                    f"{tmpfilename + '.tex'}",
+                ],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                check=True,
+            )
+        except OSError as exc:
+            # OSError should generally not occur, because it's usually only triggered if `pdflatex`
+            # doesn't exist as a command, but we've already checked that.
+            raise VisualizationError("`pdflatex` command could not be run.") from exc
+        except subprocess.CalledProcessError as exc:
+            with open("latex_error.log", "wb") as error_file:
+                error_file.write(exc.stdout)
+            raise VisualizationError("`pdflatex` call did not succeed: see `latex_error.log`.") from exc
+        base = os.path.join(tmpdirname, tmpfilename)
+        try:
+            subprocess.run(
+                ["pdftocairo", "-singlefile", "-png", "-q", base + ".pdf", base],
+                check=True,
+            )
+        except (OSError, subprocess.CalledProcessError) as exc:
+            message = "`pdftocairo` failed to produce an image."
+            raise VisualizationError(message) from exc
+        image = Image.open(base + ".png")
+        image = trim_image(image)
+        return image

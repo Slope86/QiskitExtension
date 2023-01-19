@@ -208,7 +208,7 @@ class StateVector2(Statevector):
                 )
         return (measure_state_list, remain_state_list)
 
-    def show_matrix(self) -> Latex:
+    def show_matrix(self):
         """show the matrix form of statevector in LaTeX"""
         return latex_drawer.matrix_to_latex(self.to_matrix())
 
@@ -222,7 +222,8 @@ class StateVector2(Statevector):
         """visualize statevector
 
         Args:
-            basis (List[str] | str, optional): change statevector's basis to input basis. Defaults not change.
+            basis (List[str] | str, optional): convert statevector's basis to input basis.
+                Defaults to skip basis convert.
             hide (List[int] | str, optional): hide qubits. Default to show all qubits.
             output_length (int, optional): 2^output_length = number of terms in each line. Defaults to 2(= 4 terms/line)
             output (str, optional): visualization method. Defaults to "latex".
@@ -240,7 +241,7 @@ class StateVector2(Statevector):
             case "latex":
                 return latex_drawer.state_to_latex(clone, hide, output_length)
             case "latex_source":
-                return latex_drawer.state_to_latex(clone, hide, output_length).data
+                return latex_drawer.state_to_latex(clone, hide, output_length, source=True)
             case _:
                 return clone.draw(output=output)
 

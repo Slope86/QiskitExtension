@@ -41,7 +41,7 @@ class QuantumCircuit2(QuantumCircuit):
         reverse_qc = self.reverse_bits()  # REVERSE the order of qubits to fit textbook notation
         return quantum_info.Operator(reverse_qc).data
 
-    def show_matrix(self) -> Latex:
+    def show_matrix(self):
         """Show the matrix form of the quantum circuit in LaTeX"""
         return latex_drawer.matrix_to_latex(self.to_matrix())
 
