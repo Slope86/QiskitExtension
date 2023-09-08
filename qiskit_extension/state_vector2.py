@@ -283,7 +283,7 @@ class StateVector2(Statevector):
             for i, b in zip(measure, basis):
                 other_basis[i] = b
             clone._basis_convert(other_basis)
-        result = clone._measure(measure, basis, self._num_of_qubit**2)
+        result = clone._measure(measure=measure, basis=basis, shot=4 * 2 ** len(measure))
         return latex_drawer.measure_result_to_latex(result, measure + hide, output_length)  # type: ignore
 
     @classmethod
@@ -358,6 +358,8 @@ class StateVector2(Statevector):
         for coeff, label in zip(coeffs[1:], labels[1:]):
             state += cls._from_label(label) * coeff
 
+        if type(state) is not StateVector2:
+            raise QiskitError("Unexpected error.")
         state /= super(type(state), state).trace() ** 0.5
         return state
 

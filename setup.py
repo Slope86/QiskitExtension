@@ -11,6 +11,7 @@ setuptools.setup(
     description="A Qiskit visualize extension",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    license="MIT",
     url="https://github.com/Slope86/QiskitExtension",
     packages=setuptools.find_packages(exclude=["experiments", "tests"]),
     package_data={"": ["*.ini"]},
