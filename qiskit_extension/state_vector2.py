@@ -251,7 +251,7 @@ class StateVector2(Statevector):
         basis: List[str] | str | None = None,
         hide: List[int] | str = [],
         output_length: int = 2,
-        other_basis: List[str] | str | None = None,
+        remaining_basis: List[str] | str | None = None,
     ) -> Latex:
         """visualize measure result
 
@@ -260,7 +260,7 @@ class StateVector2(Statevector):
             basis (List[int] | str, optional): measure in what basis. Defaults to z basis.
             hide (List[int] | str, optional): hide qubits. Default to show all qubits.
             output_length (int, optional): 2^output_length = number of terms in each line. Defaults to 2(= 4 terms/line)
-            other_basis (List[str] | str, optional): change statevector's basis to input basis before measure.
+            remaining_basis (List[str] | str, optional): change statevector's basis to input basis before measure.
 
         Returns:
             Latex: visualization output
@@ -276,13 +276,13 @@ class StateVector2(Statevector):
             measure = [measure]
 
         clone = self.copy()
-        if other_basis is not None:
-            other_basis = list(other_basis) + ["-"] * (self._num_of_qubit - len(other_basis))
+        if remaining_basis is not None:
+            remaining_basis = list(remaining_basis) + ["-"] * (self._num_of_qubit - len(remaining_basis))
             if basis is None:
                 basis = ["z"] * len(measure)
             for i, b in zip(measure, basis):
-                other_basis[i] = b
-            clone._basis_convert(other_basis)
+                remaining_basis[i] = b
+            clone._basis_convert(remaining_basis)
         result = clone._measure(measure=measure, basis=basis, shot=4 * 2 ** len(measure))
         return latex_drawer.measure_result_to_latex(result, measure + hide, output_length)  # type: ignore
 

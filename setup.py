@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="QiskitExtension",
-    version="0.1.2",
+    version="0.1.3",
     author="HSIEH, LI-YU",
     author_email="cjh9027@smail.nchu.edu.tw",
     description="A Qiskit visualize extension",
