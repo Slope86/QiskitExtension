@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="QiskitExtension",
-    version="0.1.3",
+    version="0.1.4",
     author="HSIEH, LI-YU",
     author_email="cjh9027@smail.nchu.edu.tw",
     description="A Qiskit visualize extension",
@@ -23,6 +23,9 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=["qiskit[visualization] >= 0.22.3"],
+    install_requires=[
+        "qiskit[visualization] == 1.0.0",
+        "qiskit-aer == 0.13.3"
+    ],
     python_requires=">=3.10",
 )

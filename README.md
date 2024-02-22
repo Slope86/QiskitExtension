@@ -11,19 +11,23 @@ A simple Qiskit StateVector extension with more visualization function:
 
 ## Installation
 
-Install from PyPI
+* Option 1. install from PyPI
 
-```bash
-pip install QiskitExtension
-```
+    ```bash
+    pip install QiskitExtension
+    ```
 
-Install from source
+    Than install MikTeX from [here](https://miktex.org/) for LaTeX visualization.
 
-```bash
-git clone --depth 1 https://github.com/Slope86/QiskitExtension
-cd QiskitExtension
-pip install .
-```
+* Option 2. install from source
+
+    ```bash
+    git clone --depth 1 https://github.com/Slope86/QiskitExtension
+    cd QiskitExtension
+    pip install .
+    ```
+
+    Than install MikTeX from [here](https://miktex.org/) for LaTeX visualization.
 
 ## Configuration
 
@@ -99,8 +103,10 @@ More examples can be found in the [examples](https://github.com/Slope86/QiskitEx
 
 ## Requirement
 
-Python >= 3.10\
-qiskit[visualization] >= 0.22.3
+[MiKTeX](https://miktex.org/) (for LaTeX visualization)  
+Python >= 3.10  
+qiskit[visualization] == 1.0.0  
+qiskit-aer == 0.13.3
 
 ## License
 
